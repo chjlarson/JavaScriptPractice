@@ -1,3 +1,5 @@
+/*
+
 // Lecture: let and const
 
 // ES5
@@ -214,21 +216,21 @@ var boxesArr5 = Array.prototype.slice.call(boxes);
 boxesArr5.forEach(function(cur) {
     cur.style.backgroundColor = 'dodgerblue';
 });
-*/
+
 
 // ES6
 const boxesArr6 = Array.from(boxes);
 boxesArr6.forEach(cur => cur.stlye.backgroundColor = 'dodgerblue');
 
 // ES5
-/*
+
 for(var i = 0; i < boxesArr5.length; i++) {
     if (boxesArr5[i].className === 'box blue') {
         continue;
     }
     boxesArr5[i].textcontext = 'I changed to blue';
 }
-*/
+
 
 // ES6
 for (const cur of boxesArr6) {
@@ -251,3 +253,256 @@ console.log(ages[full.indexOf(true)]);
 //ES6
 console.log(ages.findIndex(cur => cur >=18));
 console.log(ages.find(cur => cur >= 18));
+
+// Lecture: Spread operator
+
+function addFourAges (a, b, c, d) {
+    return a+b+c+d;
+}
+
+var sum1 = addFourAges(18,30,12,21);
+console.log(sum1);
+
+// ES5
+var ages = [10, 30, 12,21];
+var sum2 = addFourAges.apply(null, ages);
+console.log(sum2);
+
+//ES6
+const sum3 = addFourAges(...ages);
+console.log(sum3);
+
+const familysmith = ['John', 'Jane', 'Mark'];
+const familyMiller = ['Mary', 'Bob'];
+
+const bigFam = [...familySmith, 'Lily', ...familyMiller];
+console.log(bigFamily);
+
+const h = document.querySelector('hi');
+const boxes = document.querySelectorAll('.box');
+const all = [h, ...boxes];
+
+Array.from(all).forEach(cur => cur.style.color = 'purple');
+
+
+// Rest Parameters
+// Opposite of Spread
+
+
+// ES5
+function isFullAge5() {
+    console.log(arguents);
+    
+    Array.prototype.slice.call(arguments);
+    
+    ageArr.forEach(function(cur) {
+        console.log((2017 - cur) >= 18);
+    })
+}
+//isFullAge5(1990, 1999, 2965);
+//isFullAge5(1999, 1996, 1999, 2016, 1987);
+
+// ES6
+function isFullAge6(...years) {
+    console.log(years)
+    
+    years.forEach(cur => console.log((2017 - cur) >= 18));
+}
+isFullAge6(1999, 1996, 1999, 2016, 1987);
+
+
+// ES5
+function isFullAge5(limit) {
+    console.log(arguents);
+    
+   var argsArr =  Array.prototype.slice.call(arguments, 1);
+    
+    ageArr.forEach(function(cur) {
+        console.log((2017 - cur) >= limit);
+    })
+}
+isFullAge5(21, 1990, 1999, 2965);
+//isFullAge5(1999, 1996, 1999, 2016, 1987);
+
+// ES6
+function isFullAge6(limit, ...years) {
+    console.log(years)
+    
+    years.forEach(cur => console.log((2017 - cur) >= limit));
+}
+isFullAge6(16, 1999, 1996, 1999, 2016, 1987);
+
+// Lecture: Defualt parameters
+
+
+// ES5
+function SmithPerson(firstName, birthYear, lastName, nationality) {
+    lastName === undefined ? lastName = 'Smith': lastName = lastName;
+    nationality === undefined ? nationality = 'American': nationality = nationality;
+    
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthYear = bithYear;
+    this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1990);
+var mary = new SmithPerson('Emily', 1993, 'Diaz', 'Spanish');
+
+
+// ES6
+function SmithPerson(firstName, birthYear, lastName = 'Smith', nationality = 'American') {
+    
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthYear = bithYear;
+    this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1990);
+var mary = new SmithPerson('Emily', 1993, 'Diaz', 'Spanish');
+
+//Lecture: Maps
+
+const question = new Map();
+question.set('question', 'What is the offical name of the latest major JavaScript version?');
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'Correct answer');
+question.set(false, 'Wrong, please try again');
+
+console.log(question.get('question'));
+console.log(question.size);
+
+if (question.has(4)) {
+    //question.delete(4);
+    console.log('answer 4 is here');
+}
+//question.clear();
+
+//question.forEach((value, key) => console.log("This is ${key}, and it's set to ${value}"));
+
+for (let [key, value] pf question.entries*()) {
+    if (typeof(key) === 'number') {
+        console.log('Answer ${key}: ${value}');
+    }
+}
+
+const and = parseInt(prompt('Write the correct answer'));
+
+console.log(question.get(ans === question.get('correct')));
+
+
+//Lecture: Classes
+
+// ES5
+var Person5 = function(name, birthYear, job) {
+    this.name = name;
+    this.birthYear= birthYear;
+    this.job = job;
+}
+
+Person5.prototype.calculateAge = function() {
+    var age = new Date().getFullYear() - this.birthYear;
+    console.log(age);
+}
+
+var john5 = new Person5('John', 1990, 'teacher');
+
+// ES6
+class Person6 {
+     constructor (name, birthYear, job) {
+         this.name = name;
+         this.birthYear = birthYear;
+         this.job = job;
+     }
+    
+    calculateAge() {
+        var age = new Date().getFullYear() - this.birthYear;
+        console.log(age);
+    }
+    
+    static greeting() {
+        console.log('Hey there!');
+    }
+     
+}
+
+const john6 = new Person6('John', 1990, 'teacher');
+
+Person6.greeting();
+
+
+
+// Lecture: Classes and subclasses
+
+// ES5
+var Person5 = function(name, birthYear, job) {
+    this.name = name;
+    this.birthYear= birthYear;
+    this.job = job;
+}
+
+Person5.prototype.calculateAge = function() {
+    var age = new Date().getFullYear() - this.birthYear;
+    console.log(age);
+}
+
+var john5 = new Person5('John', 1990, 'teacher');
+
+var Athlete5 = function(name, birthYear, job, games, medals) {
+    Person5.call(this, name, birthYear, job);
+    this.games = games;
+    this.medals = medals;
+}
+
+Athlete5.prototype.Object.create(Person5.prototype);
+
+Athlete5.prototype.wonMedal = function() {
+    this.medal++;
+    console.log(this.medals);
+}
+
+var johnAthlete5 = new Athlete5('John', 1990, 'swimmer', 3, 10);
+
+johnAthlete5.calculateAge();
+
+// ES6
+var john5 = new Person5('John', 1990, 'teacher');
+
+// ES6
+class Person6 {
+     constructor (name, birthYear, job) {
+         this.name = name;
+         this.birthYear = birthYear;
+         this.job = job;
+     }
+    
+    calculateAge() {
+        var age = new Date().getFullYear() - this.birthYear;
+        console.log(age);
+    }
+}
+
+class Athlete6 extends Person6 {
+    constructor(name, birthYear, job, games, medals) {
+        super(name, birthYear, job);
+        this.games = games;
+        this.medals = medals;
+    }
+    
+    wonMedals {
+        this.medal++;
+        console.log(this.medals);
+    }
+}
+
+const johnAthlete6 = new Athlete6('John', 1990, 'swimmer', 3, 10);
+
+johnAthlete6.wonMedals();
+johnAthlete6.calculateAge();
+
+*/
